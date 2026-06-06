@@ -1,14 +1,20 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import ProfileForm from "@/components/Dashboard/ProfileForm";
 import AgentVisualizer from "@/components/Dashboard/AgentVisualizer";
 import RoadmapDisplay from "@/components/Dashboard/RoadmapDisplay";
 import { useRoadmapStore } from "@/store/useRoadmapStore";
 import { Terminal, Shield, ArrowLeft, RefreshCw, Cpu, Award } from "lucide-react";
+import Footer from "@/components/Footer";
 
 export default function Dashboard() {
   const { status, roadmap, resetForm } = useRoadmapStore();
+
+  useEffect(() => {
+    document.title = "Dashboard Workspace | WDID AI";
+  }, []);
 
   const isGenerating = status !== "idle" && status !== "done" && status !== "error";
   const hasRoadmap = !!roadmap;
@@ -139,6 +145,7 @@ export default function Dashboard() {
           )}
         </div>
       </main>
+      <Footer />
     </div>
   );
 }
